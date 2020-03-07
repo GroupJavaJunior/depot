@@ -14,16 +14,19 @@
     <div id="columns">
       <div id="side">
         <ul>
-          <li><a href=""><a>Home</a></li>
-            <li><a href=""><a>Questions</a></li>
-              <li><a href=""><a>News</a></li>
-                <li><a href=""><a>Contact</a></li>
-                </ul>
-                <%= content_tag :div, Time.now.to_formatted_s(:short), class: 'time' %>
-              </div>
-              <div id="main">
-                <%= yield %>
-              </div>
-            </div>
-          </body>
-        </html>
+          <li><%= link_to 'Home', store_path %></li>
+          <li><%= link_to 'Product Manager', products_path %></li>
+          <li><a href=""><a>News</a></li>
+            <li><a href=""><a>Contact</a></li>
+            </ul>
+            <%= content_tag :div, Time.now.to_formatted_s(:short), class: 'time' %>
+            <% if (visit_count = session[:visit_count].to_i) > 5 %>
+              <%= content_tag :div, pluralize(visit_count, 'visit'), class: 'visit' %>
+            <% end %>
+          </div>
+          <div id="main">
+            <%= yield %>
+          </div>
+        </div>
+      </body>
+    </html>
