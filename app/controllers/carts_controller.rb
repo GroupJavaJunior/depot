@@ -63,7 +63,7 @@ class CartsController < ApplicationController
   def destroy
     @cart.destroy if @cart.id == session[:cart_id]
     respond_to do |format|
-      format.html { redirect_to store_url, notice: 'Now your trash is empty!' }
+      format.html { redirect_to store_url }
       format.json { head :no_content }
     end
   end
