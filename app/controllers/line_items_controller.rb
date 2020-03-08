@@ -3,8 +3,9 @@
 class LineItemsController < ApplicationController
   include CurrentCart
   include VisitCounter
+  include LineItemRemover
 
-  before_action :set_cart, :reset_visit, only: [:create]
+  before_action :set_cart, :reset_visit, only: [:create, :destroy]
   before_action :set_line_item, only: %i[show edit update destroy]
 
   # GET /line_items
@@ -60,9 +61,10 @@ class LineItemsController < ApplicationController
   # DELETE /line_items/1
   # DELETE /line_items/1.json
   def destroy
-    @line_item.destroy
+    remove_line_item(@line_item)
     respond_to do |format|
       format.html { redirect_to store_url }
+      format.js { @current_item = @line_item }
       format.json { head :no_content }
     end
   end

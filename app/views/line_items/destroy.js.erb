@@ -3,6 +3,8 @@ $('#cart').html("<%= escape_javascript render(@cart) %>");
 $('#current_item').css({'background-color':'#88ff88'}).
 animate({'background-color':'#114411'}, 1000)
 };
-<% if @cart.line_items.size > 0 %>
-  $('#cart').show('fast', render);
+<% if @cart.line_items.size === 0 %>
+  $('#cart').hide('fast', render);
+<% else %>
+  render()
 <% end %>

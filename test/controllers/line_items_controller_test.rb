@@ -59,4 +59,21 @@ class LineItemsControllerTest < ActionController::TestCase
 
     assert_redirected_to store_url
   end
+
+  test 'should destroy line_item with ajax' do
+    @line_item.quantity = 2
+    @line_item.save!
+
+    assert_difference('LineItem.count', 0) do
+      xhr :delete, :destroy, id: @line_item
+    end
+
+    assert_response :success
+
+    assert_difference('LineItem.count', -1) do
+      xhr :delete, :destroy, id: @line_item
+    end
+
+    assert_response :success
+  end
 end

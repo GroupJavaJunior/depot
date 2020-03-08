@@ -1,2 +1,3 @@
-$('#cart').html("<%= escape_javascript render(@cart) %>");
-$('#cart').hide('blind', 1000);
+$('#cart').hide('fast', function() {
+  $('#cart').html("<%= escape_javascript render(@cart) %>");
+});
