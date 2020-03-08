@@ -64,6 +64,7 @@ class CartsController < ApplicationController
     @cart.destroy if @cart.id == session[:cart_id]
     respond_to do |format|
       format.html { redirect_to store_url }
+      format.js
       format.json { head :no_content }
     end
   end
