@@ -5,6 +5,7 @@ class StoreController < ApplicationController
   include VisitCounter
 
   before_action :add_visit, :set_cart, only: [:index]
+  skip_before_action :authorize
 
   def index
     @products = Product.order(:title)

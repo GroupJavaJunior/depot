@@ -20,13 +20,21 @@
         <% end %>
         <ul>
           <li><%= link_to 'Store', store_path %></li>
-          <li><%= link_to 'Product Manager', products_path %></li>
+          <li><%= link_to 'Log in', login_path %></li>
           <li><a href=""><a>News</a></li>
             <li><a href=""><a>Contact</a></li>
             </ul>
             <%= content_tag :div, Time.now.to_formatted_s(:short), class: 'time' %>
             <% if (visit_count = session[:visit_count].to_i) > 5 %>
               <%= content_tag :div, pluralize(visit_count, 'visit'), class: 'visit' %>
+            <% end %>
+            <% if session[:user_id] %>
+              <ul>
+                <li><%= link_to 'Orders', orders_path %></li>
+                <li><%= link_to 'Products', products_path %></li>
+                <li><%= link_to 'Users', users_path %></li>
+              </ul>
+              <%= button_to 'logout', logout_path, method: :delete %>
             <% end %>
           </div>
           <div id="main">

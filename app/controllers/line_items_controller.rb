@@ -5,8 +5,9 @@ class LineItemsController < ApplicationController
   include VisitCounter
   include LineItemRemover
 
-  before_action :set_cart, :reset_visit, only: [:create, :destroy]
+  before_action :set_cart, :reset_visit, only: %i[create destroy]
   before_action :set_line_item, only: %i[show edit update destroy]
+  skip_before_action :authorize, only: :create
 
   # GET /line_items
   # GET /line_items.json
